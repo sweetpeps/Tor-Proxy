@@ -39,7 +39,8 @@ header('Content-Type: '.$headerr['content_type']);
 echo  $remoteSite;
 }
 else {
-  echo "Hello, if you want to use this site you must put the onion link before this sites link as a sub domain and remove the .onion\n\n";
+ 
+  echo  nl2br ("Hello, if you want to use this site you must put the onion link before this sites link as a sub domain and remove the .onion\r\n\r\n");
   echo "If you want to support me please send bitcoin to: 1EN41NQmVeGrwYoYYHtZ4yMTvCib6wG3SZ";
 }
 ?>
