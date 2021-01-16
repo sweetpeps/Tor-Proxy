@@ -1,11 +1,12 @@
-
 <?php
 if (strpos($_SERVER["SERVER_NAME"], ".")) {
+
 list($subdomain,$host) = explode('.', $_SERVER["SERVER_NAME"]);
 
 $url = 'http://' . $subdomain . '.onion/';
 $request = $_SERVER['REQUEST_URI'];
 $ch = curl_init();
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
   
@@ -14,12 +15,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     curl_setopt($ch, CURLOPT_POSTFIELDS, $_POST);
    
 }
- $options = [
+
+
+$options = [
   CURLOPT_URL => $url . $request,
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_HEADER         => false,
   CURLOPT_FOLLOWLOCATION => true,
-  CURLOPT_ENCODING       => "",
+ CURLOPT_ENCODING       => "",
 CURLOPT_AUTOREFERER    => true,
   CURLOPT_CONNECTTIMEOUT => 120,
   CURLOPT_TIMEOUT        => 120,
@@ -31,12 +34,20 @@ CURLOPT_AUTOREFERER    => true,
 ];
 
 
+
 curl_setopt_array($ch, $options);
+curl_setopt($ch, CURLOPT_USERAGENT,'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0');
+
 $remoteSite = curl_exec($ch);
 $headerr = curl_getinfo($ch);
 curl_close($ch);
+
+
 header('Content-Type: '.$headerr['content_type']);
 echo  $remoteSite;
+
+exit;
+
 }
 else {
  
